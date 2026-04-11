@@ -6,7 +6,13 @@ DEFAULT_COIN = "bitcoin"
 def fetch_crypto_data(coin_id: str = DEFAULT_COIN) -> Optional[Dict]:
     """
     Extraccion de datos de mercado para una criptomoneda específica desde la API de CoinGecko.
+
+    Args:
+        coin_id (str): Identificador de la moneda (ej. 'bitcoin'). 
+    Returns:
+        Optional[Dict]: Diccionario con datos de mercado o None si hay error
     """
+
     url = f"https://api.coingecko.com/api/v3/coins/{coin_id}"
     
     headers = {
