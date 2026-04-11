@@ -3,6 +3,10 @@ from typing import Dict, Optional
 
 def transform_market_data(raw_data: Dict) -> Optional[pd.DataFrame]:
     """Crea un DataFrame básico a partir de los datos crudos."""
+
+    if not raw_data:
+        return None
+
     try:
         data_dict = {
             'coin_name': [raw_data.get('name')],
@@ -13,7 +17,9 @@ def transform_market_data(raw_data: Dict) -> Optional[pd.DataFrame]:
         }
         df = pd.DataFrame(data_dict)
         df['current_price_usd'] = df['current_price_usd'].round(2)
+        df['last_updated'] = pd.to_datetime(df['last_updated'])
         return df
     except Exception as e:
         print(f"Error: {e}")
         return None
+    
