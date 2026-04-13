@@ -26,10 +26,6 @@ def fetch_crypto_data(coin_id: str = DEFAULT_COIN) -> Optional[Dict]:
     except requests.exceptions.RequestException as e:
         print(f"Error al conectar con la API: {e}")
         return None
-
-if __name__ == "__main__":
-    # Prueba 
-    data = fetch_crypto_data(DEFAULT_COIN)
-    if data:
-        print(f"Conexion exitosa, Moneda: {data['name']}")
-        print(f"Precio actual: ${data['market_data']['current_price']['usd']}")
+    except ValueError as e:
+        print(f"Error al decodificar la respuesta JSON: {e}")
+        return None
